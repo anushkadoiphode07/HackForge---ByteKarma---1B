@@ -1,31 +1,104 @@
 <%- include("partials/header.ejs") %>
 
     <!-- Options -->
-
-    <div>
-      <% if(userLoggedIn === true && govLoggedIn === false){ %>
+    <% if(userLoggedIn === true && govLoggedIn === false){ %>
+      <div class="userlogindiv"> 
+        <div class="row userrow">
+          <a href="/user/login/home2/infra">
+            <button>Infrastructure</button>
+          </a>
+        </div>
+        <div class="row userrow">
+          <a href="/user/login/home2/services">
+            <button>Services</button>
+          </a>
+        </div>
+        <div class="row userrow">
+          <a href="/user/login/home2/inititative">
+            <button>Initiative</button>
+          </a>
+        </div>
+      </div>
+    <!-- <div class="row">
+      <div class="col-8">
+        <img src="/images/Transport.jpg" alt="">
+      </div>
+      <div class="col-4">
         <a href="/user/login/home2/infra">
           <button>Infrastructure</button>
         </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <img src="images/Transport.jpg" alt="">
+      </div>
+      <div class="col-4">
         <a href="/user/login/home2/services">
           <button>Services</button>
         </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <img src="images/Transport.jpg" alt="">
+      </div>
+      <div class="col-4">
         <a href="/user/login/home2/inititative">
           <button>Initiative</button>
         </a>
-      <% } else { %>
-        <a href="/government/login/home2/infra">
-          <button>Infrastructure</button>
-        </a>
-        <a href="/government/login/home2/services">
-          <button>Services</button>
-        </a>
-        <a href="/government/login/home2/inititative">
-          <button>initiative</button>
-        </a>        
+      </div>
+    </div> -->
+    <% } else {%> 
+      <div class="userlogindiv"> 
+        <div class="row">
+          <a href="/government/login/home2/infra">
+            <button>Infrastructure</button>
+          </a>
+        </div>
+        <div class="row">
+          <a href="/government/login/home2/services">
+            <button>Services</button>
+          </a>
+        </div>
+        <div class="row">
+          <a href="/government/login/home2/inititative">
+            <button>Initiative</button>
+          </a>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col-8">
+          <img src="images/Transport.jpg" alt="">
+        </div>
+        <div class="col-4">
+          <a href="/government/login/home2/infra">
+            <button>Infrastructure</button>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <img src="images/Transport.jpg" alt="">
+        </div>
+        <div class="col-4">
+          <a href="/government/login/home2/services">
+            <button>Services</button>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <img src="images/Transport.jpg" alt="">
+        </div>
+        <div class="col-4">
+          <a href="/government/login/home2/inititative">
+            <button>Initiative</button>
+          </a>
+        </div>
+      </div> -->
       <% } %>
-        
-    </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Government Home</title>
-</head>
-<body>
+<%- include("partials/header.ejs") %>
     <div class="jumbotron centered">
         <div class="container">
-          <a class="btn btn-light btn-lg" href="/government/login/home2" role="button">View Projects</a>
-          <a class="btn btn-dark btn-lg" href="/governmentIssue" role="button">View Issues</a>
+            <div class="row">
+                <div class="gov-portal">
+                    <h1>Government Portal</h1>
+                </div>
+                <div class="col-6 gov-home-proj">
+                    <a class="btn btn-dark log1" href="/government/login/home2" role="button">View Projects</a>
+                </div>
+                <div class="col-6 gov-home-issue">
+                    <a class="btn btn-dark log1 " href="/governmentIssue" role="button">View Issues</a>
+                </div>
+            </div> 
         </div>
     </div>
 </body>

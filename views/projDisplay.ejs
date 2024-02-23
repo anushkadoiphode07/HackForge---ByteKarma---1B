@@ -1,23 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://kit.fontawesome.com/937e29d736.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+<%- include("partials/header.ejs") %>
     <% if(userLoggedIn === true && govLoggedIn === false) { %>
         <% if(info2.length !== 0){ %>
-            <div id="data" >
+            <div id="data" hidden>
                 <%= info2 %>
             </div>
             <div id="data2" hidden>
                 <%= info3 %>
             </div>
             <% } %>
-            <p><%=info%></p>
+            <div class="card">
+                <% if(locals.info) { %>
+                    <h3>Project Name: <%= info[0].projectName %></h3>
+                    <h4>Project Capacity: <%= info[0].projectCapacity %></h4>
+                    <h4>Project Cost: <%= info[0].projCost %> cr</h4>
+                    <h4>Sector: <%= info[0].sector %></h4>
+                    <h4>Sub-Sector: <%= info[0].subSector %></h4>
+                    <h4>Status: <%= info[0].status %></h4>
+                    <h4>Project Authority: <%= info[0].projAuth %></h4>
+                    <h4>Last Updated: <%= info[0].updateDate %></h4>
+                <% } %>
+            </div>  
             <div>
                 <canvas id="myChart"></canvas>
             </div>
