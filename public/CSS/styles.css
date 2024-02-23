@@ -35,3 +35,55 @@
 .rating > input:checked ~ label:hover ~ label {
   color: #FECE31;
 }
+
+/* Authentication */
+
+.auth-left {
+  background-color: #072138;
+  color: #d292ff;
+  height: 90vh;
+  text-align: left;
+}
+
+.tagline {
+  margin-top: 33vh;
+  margin-left: 50px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 4rem;
+}
+
+.tag {
+  margin-left: 50px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 3rem;
+}
+
+.auth-right {
+  background-color: black;
+  color: #d292ff;
+  height: 90vh;
+  text-align: center;
+}
+
+.buttons-log {
+  margin-top: 38vh;
+  
+}
+
+.log {
+  width: 250px;
+  height: 45px;
+  background-color: #1D24CA;
+}
+
+.log-bt {
+  color: white;
+}
+
+.log:hover {
+  color: #1D24CA !important;
+  text-decoration: none;
+}
+
+/* Government Login Page */
