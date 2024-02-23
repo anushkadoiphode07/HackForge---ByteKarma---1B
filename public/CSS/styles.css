@@ -87,3 +87,25 @@
 }
 
 /* Government Login Page */
+.gov-login {
+  margin: auto;
+  height: 40%;
+  width: 40%;
+  border: solid;
+  border-color: black;
+  border-radius: 2%;
+  padding: 20px;
+  margin-top: 20vh;
+  background-color: #072138;
+  color: white;
+}
+
+li {
+  text-decoration: none;
+  color: white;
+}
+.nav-link {
+  text-decoration: none;
+}
+
+
