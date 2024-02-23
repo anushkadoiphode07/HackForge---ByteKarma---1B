@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="data" hidden>
+        <%= mth %>
+    </div>
+    <div id="data2" hidden>
+        <%= Arr %>
+    </div>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
+
+<script>
+    const ctx = document.getElementById('myChart');
+    const data = document.getElementById('data').innerHTML;
+    const data2 = document.getElementById('data2').innerHTML;
+    const data1 = [];
+    const data3 = [];
+    var store = "";
+    var store1 = "";
+    console.log(data2);
+    for(var i=0; i<data.length; i++){
+        if(data[i] === ' ' || data[i] === '\n'){
+            continue;
+        }
+        else if(data[i] !== ','){
+            store += data[i];
+        }
+        else{
+            data1.push(store);
+            store = "";
+        }
+    }
+    data1.push(store);
+    for(var i=0; i<data2.length; i++){
+        if(data2[i] === ' ' || data2[i] === '\n'){
+            continue;
+        }
+        else if(data2[i] !== ','){
+            store1 += data2[i];
+        }
+        else{
+            data3.push(store1);
+            store1 = "";
+        }
+    }
+    data3.push(store1);
+    console.log(data3);
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: data1,
+        datasets: [{
+          label: '# of Votes',
+          data: data3,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+</script>

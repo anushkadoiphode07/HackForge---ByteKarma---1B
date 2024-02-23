@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government</title>
+</head>
+<body>
+    
+    <form action="/addNewProject" method="post">
+        <div class="projectName">
+            <label for="">Project Name</label>
+            <input type="text" name="projName">
+        </div>
+        <div class="projectCapacity">
+            <label for="">Project Capacity(km)</label>
+            <input type="text" name="projCap">
+        </div>
+        <div class="projectCost">
+            <label for="">Project Cost</label>
+            <input type="text" name="projCost">
+        </div>
+        <div class="sector">
+            <label for="sector">Sector</label>
+            <select name="sector" id="sectorInput">
+                <% sectorList.forEach(function(sector){%>
+                <option value=<%= sector %>><%= sector %></option>
+                <%});%>
+            </select>
+        </div>
+        <div class="subSector">
+            <label for="">Sub-Sector</label>
+            <input type="text" name="projSubSect">
+        </div>
+        <div class="Status">
+            <label for="">Status</label>
+            <input type="text" name="projStat">
+        </div>
+        <div class="projAuth">
+            <label for="">Project Authority</label>
+            <input type="text" name="projAuth">
+        </div>
+        <div class="state">
+            <label for="">State</label>
+            <select name="state" id="state">
+                <% if(locals.states) { %>
+                    <% states.forEach(function (state) { %>
+                        <option value="state"><%= state %></option> 
+                    <% }) %>
+                <% } %>
+            </select>
+        </div>
+        <div class="startdate">
+            <label for="">Start Date</label>
+            <input type="text" name="projDate">
+        </div>
+        <div class="estimatetime">
+            <label for="">Estimated Date</label>
+            <input type="text" name="projEst">
+        </div>
+        <div class="tenure">
+            <label for="">Tenure</label>
+            <input type="text" name="tenure">
+        </div>
+        <div class="projDesc">
+            <label for="">Project Description</label>
+            <input type="text" name="projDesc">
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+</body>
+</html>

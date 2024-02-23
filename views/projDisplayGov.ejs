@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/937e29d736.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <% if(info2.length !== 0){ %>
+    <div id="data" >
+        <%= info2 %>
+    </div>
+    <div id="data2" hidden>
+        <%= info3 %>
+    </div>
+    <% } %>
+    <p><%=info%></p>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <form action="/trackprogress" method="post">
+        <label for="">Enter Month</label>
+        <input type="text" name="month" id="" placeholder="eg: Jan-22">
+        <input type="number" name="percent">
+        <button type="submit">Submit</button>
+    </form>
+    <% if(locals.info1) { %>
+        <% info1.forEach(function (listFeedback) { %>
+            <div class="project-feedback"></div>
+            <p><%= listFeedback.name %></p>
+            <p><%= listFeedback.description %></p>
+            <% for(let i=0; i<listFeedback.noOfStars;i++) { %>
+                <span class="stars">★</span>
+            <% } %> 
+            <img src="/images/<%= listFeedback.imgname %>" alt="">
+        </div>
+        <% }) %>
+    <% } %>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="functions.js"></script>
+</body>
+</html>
+
+<script>
+    const ctx = document.getElementById('myChart');
+    const data = document.getElementById('data').innerHTML;
+    const data2 = document.getElementById('data2').innerHTML;
+    const data1 = [];
+    const data3 = [];
+    var store = "";
+    var store1 = "";
+    console.log(data2);
+    for(var i=0; i<data.length; i++){
+        if(data[i] === ' ' || data[i] === '\n'){
+            continue;
+        }
+        else if(data[i] !== ','){
+            store += data[i];
+        }
+        else{
+            data1.push(store);
+            store = "";
+        }
+    }
+    data1.push(store);
+    for(var i=0; i<data2.length; i++){
+        if(data2[i] === ' ' || data2[i] === '\n'){
+            continue;
+        }
+        else if(data2[i] !== ','){
+            store1 += data2[i];
+        }
+        else{
+            data3.push(store1);
+            store1 = "";
+        }
+    }
+    data3.push(store1);
+    console.log(data3);
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: data1,
+        datasets: [{
+          label: '# of Votes',
+          data: data3,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+</script>

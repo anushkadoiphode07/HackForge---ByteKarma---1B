@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/showIssues" method="post">
+        <select name="deptSelected" id="">
+            <option value="Transport">Transport</option>
+            <option value="Water&nbsp;Sanitation">Water Sanitation</option>
+            <option value="Energy">Energy</option>
+            <option value="Social&nbsp;and&nbsp;Commercial&nbsp;Infrastructure">Social and Commercial Infrastructure</option>
+        </select>
+
+        <button type="submit">Show</button>
+    </form>
+
+    <p><%= issues %></p>
+    
+</body>
+</html>
