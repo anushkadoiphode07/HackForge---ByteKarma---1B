@@ -8,28 +8,35 @@
                 <%= info3 %>
             </div>
             <% } %>
-            <div class="card">
-                <% if(locals.info) { %>
-                    <h3>Project Name: <%= info[0].projectName %></h3>
-                    <h4>Project Capacity: <%= info[0].projectCapacity %></h4>
-                    <h4>Project Cost: <%= info[0].projCost %> cr</h4>
-                    <h4>Sector: <%= info[0].sector %></h4>
-                    <h4>Sub-Sector: <%= info[0].subSector %></h4>
-                    <h4>Status: <%= info[0].status %></h4>
-                    <h4>Project Authority: <%= info[0].projAuth %></h4>
-                    <h4>Last Updated: <%= info[0].updateDate %></h4>
-                <% } %>
-            </div>  
-            <div>
-                <canvas id="myChart"></canvas>
+            <div class="row mb-5">
+                <div class="col-6">
+                    <div class="card projDetail w-75 m-auto mt-3">
+                        <% if(locals.info) { %>
+                            <em><h4><%= info[0].projectName %></h4></em>
+                            <br>
+                            <h5>Project Capacity: <%= info[0].projectCapacity %></h5>
+                            <h5>Project Cost: <%= info[0].projCost %> cr</h5>
+                            <h5>Sector: <%= info[0].sector %></h5>
+                            <h5>Sub-Sector: <%= info[0].subSector %></h5>
+                            <h5>Status: <%= info[0].status %></h5>
+                            <h5>Project Authority: <%= info[0].projAuth %></h5>
+                            <h5>Last Updated: <%= info[0].updateDate %></h5>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="chartdisplay">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
             </div>
             <form action="/submitFeedback" enctype="multipart/form-data" method="post" >
-                <div class="feedbackName">
-                    <label for="Name" >Name:</label>
-                    <input type="text" placeholder="Enter your name" name="userName">
+                <div class="feedbackName mb-3 w-25 mt-5">
+                    <label for="Name" class="form-label" ><strong>Submit Your feedback</strong></label>
+                    <input type="text" class="form-control" placeholder="Enter your name" name="userName">
                 </div>
-                <div class="feedbackDesc">
-                    <input type="text" placeholder="Enter your feedback" name="userDesc">
+                <div class="feedbackDesc mb-3 w-25">
+                    <input type="text" class="form-control" placeholder="Enter your feedback" name="userDesc">
                 </div>
                 <div class="rating">
                     <input type="radio" id="star5" name="rating" value="5" />
@@ -65,17 +72,37 @@
             <% } %>
     <% } else {%>
         <% if(info2.length !== 0){ %>
-            <div id="data" >
+            <div id="data" hidden>
                 <%= info2 %>
             </div>
             <div id="data2" hidden>
                 <%= info3 %>
             </div>
             <% } %>
-            <p><%=info%></p>
-            <div>
-                <canvas id="myChart"></canvas>
+            <div class="row mb-5">
+                <div class="col-6">
+                    <div class="card projDetail w-75 m-auto mt-3">
+                        <% if(locals.info) { %>
+                            <em><h4><%= info[0].projectName %></h4></em>
+                            <br>
+                            <h5>Project Capacity: <%= info[0].projectCapacity %></h5>
+                            <h5>Project Cost: <%= info[0].projCost %> cr</h5>
+                            <h5>Sector: <%= info[0].sector %></h5>
+                            <h5>Sub-Sector: <%= info[0].subSector %></h5>
+                            <h5>Status: <%= info[0].status %></h5>
+                            <h5>Project Authority: <%= info[0].projAuth %></h5>
+                            <h5>Last Updated: <%= info[0].updateDate %></h5>
+                        <% } %>
+                    </div> 
+                </div>
+                <div class="col-6 mt-5">
+                    <div class="chartdisplay">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
             </div>
+             
+            
             <form action="/trackprogress" method="post">
                 <label for="">Enter Month</label>
                 <input type="text" name="month" id="" placeholder="eg: Jan-22">
@@ -96,7 +123,6 @@
             <% } %>
     <% } %>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="functions.js"></script>
 </body>
 </html>
 
@@ -141,7 +167,7 @@
       data: {
         labels: data1,
         datasets: [{
-          label: '# of Votes',
+          label: 'Percent Complete',
           data: data3,
           borderWidth: 1
         }]

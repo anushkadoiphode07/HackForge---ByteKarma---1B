@@ -5,6 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const bcrypt = require("bcrypt");
 const alert = require("alert");
+const fs = require("fs");
 
 const app = express();
 const saltRounds = 2;
@@ -14,7 +15,7 @@ var govLog = false;
 var projCount = 100;
 var matchedArr;
 var flag = 0;
-var serialNo = 0;
+var serialNo;
 var months = [];
 var completeArr = [];
 var selectedOpt;
@@ -25,6 +26,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 mongoose.connect("mongodb://127.0.0.1:27017/byteKarmaDB");
+
+let jsonData = fs.readFileSync('PPP.json');
+let jsData = JSON.parse(jsonData);
 
 const userSchema = new mongoose.Schema({
     email: String,
@@ -90,6 +94,24 @@ const projInfo = mongoose.model("projInfo",projSchema);
 const Feedback = mongoose.model("Feedback", feedbackSchema);
 const Chart = mongoose.model("Chart", chartSchema);
 const reportedIssue = new mongoose.model("reportedIssue", issueSchema);
+
+for(var i = 0; i < jsData.length; i++){
+ let temp = {
+     srNo : (i+1),
+     projectName: jsData[i].Column2,
+     projectCapacity: jsData[i].Column3,
+     projCost: jsData[i].Column4,
+     sector: jsData[i].Column5,
+     subSector: jsData[i].Column6,
+     status: jsData[i].Column7,
+     projAuth: jsData[i].Column8,
+     location: jsData[i].Column9,
+     updateDate: jsData[i].Column10
+ }
+ console.log(temp);
+ const data = new projInfo(temp);
+ data.save();
+}
 
 
 
@@ -173,12 +195,13 @@ app.get("/report", (req,res) => {
 app.get("/addNewProject", function(req, res) {
     res.render("govAddProj.ejs", {states: states, sectorList:sectors});
 });
-// //GET Individual Project
-app.get("/:srNo",async (req, res) => {
+
+//GET Individual Project
+app.get("/user/:srNo", async (req, res) => {
     serialNo = req.params.srNo;
-    let matchedArr1 = await projInfo.find({srNo: serialNo});
-    let matchedArr2 = await Feedback.find({srNoFeed: serialNo});
-    let matchedArr3 = await Chart.find({srNoChart: serialNo});
+    var matchedArr1 = await projInfo.find({srNo: serialNo})
+    var matchedArr2 = await Feedback.find({srNoFeed: serialNo});
+    var matchedArr3 = await Chart.find({srNoChart: serialNo});
     console.log(matchedArr3);
     if(matchedArr3.length === 0){
         res.render("projDisplay.ejs", {info: matchedArr1, info1: matchedArr2, info2: [], info3: [], userLoggedIn: userLog, govLoggedIn: govLog});    
@@ -188,19 +211,20 @@ app.get("/:srNo",async (req, res) => {
     }
 });
 
-// app.get("/gov/:srNo",async (req, res) => {
-//     serialNo = req.params.srNo;
-//     let matchedArr1 = await projInfo.find({srNo: serialNo});
-//     let matchedArr2 = await Feedback.find({srNoFeed: serialNo});
-//     let matchedArr3 = await Chart.find({srNoChart: serialNo});
-//     console.log(matchedArr3);
-//     if(matchedArr3.length === 0){
-//         res.render("projDisplayGov.ejs", {info: matchedArr1, info1: matchedArr2, info2: [], info3: []});    
-//     }
-//     else{
-//         res.render("projDisplayGov.ejs", {info: matchedArr1, info1: matchedArr2, info2: matchedArr3[0].xaxisVal, info3: matchedArr3[0].yaxisVal});
-//     }
-// });
+
+app.get("/gov/:srNo",async (req, res) => {
+    serialNo = req.params.srNo;
+    let matchedArr1 = await projInfo.find({srNo: serialNo});
+    let matchedArr2 = await Feedback.find({srNoFeed: serialNo});
+    let matchedArr3 = await Chart.find({srNoChart: serialNo});
+    console.log(matchedArr3);
+    if(matchedArr3.length === 0){
+        res.render("projDisplayGov.ejs", {info: matchedArr1, info1: matchedArr2, info2: [], info3: []});    
+    }
+    else{
+        res.render("projDisplayGov.ejs", {info: matchedArr1, info1: matchedArr2, info2: matchedArr3[0].xaxisVal, info3: matchedArr3[0].yaxisVal});
+    }
+});
 
 app.post("/user/register", function(req, res) {
     bcrypt.hash(req.body.password, saltRounds, function(err, hash){
@@ -398,7 +422,7 @@ app.post("/submitFeedback", upload.single("image"), function(req, res) {
         srNoFeed: serialNo,
         name:req.body.userName,
         description:req.body.userDesc,
-        noOfStars:req.body.rating,
+        noOfStars:Number(req.body.rating),
         imgname: res.req.file.filename,
         img: {
             data: req.file.filename,
@@ -406,7 +430,7 @@ app.post("/submitFeedback", upload.single("image"), function(req, res) {
         }
     });
     newFeedback.save();
-    res.redirect("/"+serialNo);
+    res.redirect("/user/"+serialNo);
 });
 
 app.post("/trackprogress", async function(req, res) {
@@ -428,7 +452,7 @@ app.post("/trackprogress", async function(req, res) {
     }
     months = [];
     completeArr = [];
-    res.redirect("/" + serialNo);
+    res.redirect("/user/" + serialNo);
 });
 
 app.post("/showIssues", (req,res) => {

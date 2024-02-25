@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/main.css">
-</head>
-<body>
+<%- include("partials/header.ejs") %>
     <% if(userLoggedIn === true && govLoggedIn === false){ %>
         
 
@@ -33,7 +24,7 @@
             <% if(locals.projData){ %>
               <%projData.forEach(function(item){ %>
                       <div class="col">
-                            <a href="/<%=item.srNo%>">
+                            <a href="/user/<%=item.srNo%>">
                               <div class="card shadow-sm projCard">
                                 <img src="/images/<%=item.sector%>.jpg" alt="sector_img" height="300" width="300" class="imgClass">
                                 <div class="card-body">
@@ -77,7 +68,7 @@
             <% if(locals.projData){ %>
               <%projData.forEach(function(item){ %>
                       <div class="col">
-                            <a href="/<%=item.srNo%>">
+                            <a href="/user/<%=item.srNo%>">
                               <div class="card shadow-sm projCard">
                                 <img src="/images/<%=item.sector%>.jpg" alt="sector_img" height="300" width="300" class="imgClass">
                                 <div class="card-body">

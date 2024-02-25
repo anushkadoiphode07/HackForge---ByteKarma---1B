@@ -1,23 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="/showIssues" method="post">
-        <select name="deptSelected" id="">
-            <option value="Transport">Transport</option>
-            <option value="Water&nbsp;Sanitation">Water Sanitation</option>
-            <option value="Energy">Energy</option>
-            <option value="Social&nbsp;and&nbsp;Commercial&nbsp;Infrastructure">Social and Commercial Infrastructure</option>
-        </select>
-
-        <button type="submit">Show</button>
-    </form>
-
-    <p><%= issues %></p>
+<%- include("partials/header.ejs") %>
+    <div class="w-50 m-auto">
+        <form action="/showIssues" method="post">
+            <select name="deptSelected" id="">
+                <option value="Transport">Transport</option>
+                <option value="Water&nbsp;Sanitation">Water Sanitation</option>
+                <option value="Energy">Energy</option>
+                <option value="Social&nbsp;and&nbsp;Commercial&nbsp;Infrastructure">Social and Commercial Infrastructure</option>
+            </select>
+    
+            <button type="submit">Show</button>
+        </form>
+    </div>
+    
+    <% if(locals.issues) { %>
+        <div>
+            <% issues.forEach(function(issue) { %>
+                <div class="card issue-card w-50 m-auto mt-5">
+                    <em><h4><%= issue.name %></h4></em>
+                    <h5>State: <%= issue.state %></h5>
+                    <h5>Department: <%= issue.dept %></h5>
+                    <h5>Mail ID: <%= issue.mail %></h5>
+                    <h5>Subject: <%= issue.subject %></h5>
+                    <h5>Description: <%= issue.issueDesc %></h5>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
     
 </body>
 </html>
