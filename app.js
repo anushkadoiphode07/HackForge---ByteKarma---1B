@@ -211,17 +211,19 @@ app.get("/addNewProject", function(req, res) {
 });
 
 //GET Individual Project
-app.get("/user/:srNo", async (req, res) => {
-    serialNo = req.params.srNo;
-    var matchedArr1 = await projInfo.find({srNo: serialNo})
-    var matchedArr2 = await Feedback.find({srNoFeed: serialNo});
-    var matchedArr3 = await Chart.find({srNoChart: serialNo});
-    console.log(matchedArr3);
-    if(matchedArr3.length === 0){
-        res.render("projDisplay.ejs", {info: matchedArr1, info1: matchedArr2, info2: [], info3: [], userLoggedIn: userLog, govLoggedIn: govLog});    
-    }
-    else{
-        res.render("projDisplay.ejs", {info: matchedArr1, info1: matchedArr2, info2: matchedArr3[0].xaxisVal, info3: matchedArr3[0].yaxisVal, userLoggedIn: userLog, govLoggedIn: govLog});
+app.get("/:srNo", async (req, res) => {
+    if(req.params.srNo !== "favicon.ico"){
+        serialNo = req.params.srNo;
+        var matchedArr1 = await projInfo.find({srNo: serialNo})
+        var matchedArr2 = await Feedback.find({srNoFeed: serialNo});
+        var matchedArr3 = await Chart.find({srNoChart: serialNo});
+        console.log(matchedArr3);
+        if(matchedArr3.length === 0){
+            res.render("projDisplay.ejs", {info: matchedArr1, info1: matchedArr2, info2: [], info3: [], userLoggedIn: userLog, govLoggedIn: govLog});    
+        }
+        else{
+            res.render("projDisplay.ejs", {info: matchedArr1, info1: matchedArr2, info2: matchedArr3[0].xaxisVal, info3: matchedArr3[0].yaxisVal, userLoggedIn: userLog, govLoggedIn: govLog});
+        }
     }
 });
 
@@ -444,7 +446,7 @@ app.post("/submitFeedback", upload.single("image"), function(req, res) {
         }
     });
     newFeedback.save();
-    res.redirect("/user/"+serialNo);
+    res.redirect("/"+serialNo);
 });
 
 app.post("/trackprogress", async function(req, res) {
@@ -466,7 +468,7 @@ app.post("/trackprogress", async function(req, res) {
     }
     months = [];
     completeArr = [];
-    res.redirect("/user/" + serialNo);
+    res.redirect("/" + serialNo);
 });
 
 app.post("/showIssues", (req,res) => {
@@ -483,6 +485,11 @@ app.post("/reportNewIssue", (req, res) => {
     issue.save();
     res.redirect("/userHome");
 });
+
+app.post("/uploadPDF", upload1.single('tender'), (req, res) => {
+    console.log(req.file.filename);
+    res.redirect("addNewProject");
+})
 
 app.post('/uploadPDF', upload1.single('tender'), function (req, res) {
     // req.file is the `profile-file` file

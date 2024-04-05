@@ -1,9 +1,8 @@
 <%- include("partials/header.ejs") %>
     
-    <form action="/addNewProject" method="post">
-        <div class="projectName">
-            <label for="">Project Name</label>
-            <input type="text" name="projName">
+    <div class="w-75 h-25 m-auto border rounded p-4 mt-4 mb-4 add-project">
+        <div class="border-bottom">
+            <h4 class="text-white">Add New Project</h4>
         </div>
         <div class="projectCapacity">
             <label for="">Project Capacity(km)</label>
@@ -61,15 +60,6 @@
         </div>
         <div>
             <input type="submit">
-        </div>
-    </form>
-    <form method="POST" action="/uploadPDF" enctype="multipart/form-data">
-        <div>
-            <label>Upload Tender</label>
-            <input type="file" name="tender"/>
-        </div>
-        <div>
-            <input type="submit" value="Upload" />
         </div>
     </form>
 </body>

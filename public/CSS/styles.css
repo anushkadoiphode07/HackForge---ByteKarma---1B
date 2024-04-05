@@ -144,6 +144,26 @@
 
 /* Chart */
 
+/* Add Project */
+.add-project {
+  background-color: #1c222d;
+}
+
+/* Infra Proj */
+.filter-button{
+  margin-top: 32px;
+}
+
+.filter-form {
+  margin-left: 175px;
+}
+
+.projCard {
+  height: 250px;
+  width: 350px;
+  border-radius: 5%;
+}
+
 /* Issue Display */
 .issue-card {
   background-color: #072138;
