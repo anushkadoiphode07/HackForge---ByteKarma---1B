@@ -1,64 +1,102 @@
 <%- include("partials/header.ejs") %>
     <% if(userLoggedIn === true && govLoggedIn === false){ %>
-        
-
-        <form action="/user/login/home2/infra" id="filterForm" method="post">
-          <select name="state" id="stateInput">
-            <% stateList.forEach(function(state){%>
-            <option value=<%= state %>><%= state %></option>
-            <%});%>
-          </select>
-      
-          <select name="sector" id="sectorInput">
-            <% sectorList.forEach(function(sector){%>
-            <option value=<%= sector %>><%= sector %></option>
-            <%});%>
-          </select>
-          <input type="submit" value="Filter">
-        </form>
-
-      
-        <div class="album py-5 bg-body-tertiary">
-          <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <% if(locals.projData){ %>
-              <%projData.forEach(function(item){ %>
-                      <div class="col">
-                            <a href="/user/<%=item.srNo%>">
-                              <div class="card shadow-sm projCard">
-                                <img src="/images/<%=item.sector%>.jpg" alt="sector_img" height="300" width="300" class="imgClass">
-                                <div class="card-body">
-                                  <p class="card-text"><%= item.projectName%></p>
-                                </div>
-                              </div>
-                            </a>
-                          </div>
-            <% }); %>
-            <% }else { %>
-              <h1>No data Matched</h1>
-            <% } %> 
-                </div>
-            </div>
+      <div class="pt-4 ps-4 pe-4">
+        <div class="row border-bottom border-black">
+          <div class="col-12">
+            <h3 class="text-start">Projects</h3>
+          </div>
         </div>
+      </div>
+
+      <form action="/user/login/home2/infra" id="filterForm" method="post">
+        <div>
+          <div class="row pt-4 pb-4 ps-4 pe-4 filter-form">
+            <div class="col-4">
+              <label for="" class="form-label">Select State</label>
+              <select name="state" id="stateInput" class="form-select">
+                <% stateList.forEach(function(state){%>
+                <option value=<%= state %>><%= state %></option>
+                <%});%>
+              </select>
+            </div>
+            <div class="col-4">
+              <label for="" class="form-label">Select Sector</label>
+              <select name="sector" id="sectorInput" class="form-select">
+                <% sectorList.forEach(function(sector){%>
+                <option value=<%= sector %>><%= sector %></option>
+                <%});%>
+              </select>
+            </div>
+            <div class="col-2">
+              <button class="btn w-100 btn-dark text-white filter-button" type="submit">Filter</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      
+      <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <% if(locals.projData){ %>
+            <%projData.forEach(function(item){ %>
+                    <div class="card-deck col">
+                          <a href="/<%=item.srNo%>" class="text-decoration-none">
+                            <div class="card shadow-sm projCard">
+                              <img src="/images/<%=item.sector%>.jpg" alt="sector_img" height="150" width="150" class="imgClass">
+                              <div class="card-body">
+                                <p class="card-text"><%= item.projectName%></p>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+          <% }); %>
+          <% }else { %>
+            <h1>No data Matched</h1>
+          <% } %> 
+              </div>
+          </div>
+      </div>
     <% } else { %>
-            <h1>Projects</h1>
-            <a href="/addNewProject">
-                <button type="submit">New Project</button>
-            </a>
+            <div class="pt-4 ps-4 pe-4">
+              <div class="row border-bottom border-black">
+                <div class="col-10">
+                  <h3 class="text-start">Projects</h3>
+                </div>
+                <div class="col-2">
+                  <a href="/addNewProject" class="ms-5">
+                    <button class="btn btn-dark">
+                      <!-- <i class="fa-solid fa-plus fa-lg" style="color: #ffffff;"></i> -->
+                      Add Project
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
 
         <form action="/government/login/home2/infra" id="filterForm" method="post">
-          <select name="state" id="stateInput">
-            <% stateList.forEach(function(state){%>
-            <option value=<%= state %>><%= state %></option>
-            <%});%>
-          </select>
-      
-          <select name="sector" id="sectorInput">
-            <% sectorList.forEach(function(sector){%>
-            <option value=<%= sector %>><%= sector %></option>
-            <%});%>
-          </select>
-          <input type="submit" value="Filter">
+          <div class="row pt-4 pb-4 ps-4 pe-4">
+            <div class="col-5">
+              <label for="" class="form-label">Select State</label>
+              <select name="state" id="stateInput" class="form-select">
+                <% stateList.forEach(function(state){%>
+                <option value=<%= state %>><%= state %></option>
+                <%});%>
+              </select>
+            </div>
+            <div class="col-5">
+              <label for="" class="form-label">Select Sector</label>
+              <select name="sector" id="sectorInput" class="form-select">
+                <% sectorList.forEach(function(sector){%>
+                <option value=<%= sector %>><%= sector %></option>
+                <%});%>
+              </select>
+            </div>
+            <div class="col-2">
+              <button class="btn w-100 btn-dark text-white filter-button" type="submit">Filter</button>
+            </div>
+          </div>
         </form>
 
       
@@ -68,7 +106,7 @@
             <% if(locals.projData){ %>
               <%projData.forEach(function(item){ %>
                       <div class="col">
-                            <a href="/user/<%=item.srNo%>">
+                            <a href="/<%=item.srNo%>">
                               <div class="card shadow-sm projCard">
                                 <img src="/images/<%=item.sector%>.jpg" alt="sector_img" height="300" width="300" class="imgClass">
                                 <div class="card-body">
