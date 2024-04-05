@@ -95,23 +95,23 @@ const Feedback = mongoose.model("Feedback", feedbackSchema);
 const Chart = mongoose.model("Chart", chartSchema);
 const reportedIssue = new mongoose.model("reportedIssue", issueSchema);
 
-for(var i = 0; i < jsData.length; i++){
- let temp = {
-     srNo : (i+1),
-     projectName: jsData[i].Column2,
-     projectCapacity: jsData[i].Column3,
-     projCost: jsData[i].Column4,
-     sector: jsData[i].Column5,
-     subSector: jsData[i].Column6,
-     status: jsData[i].Column7,
-     projAuth: jsData[i].Column8,
-     location: jsData[i].Column9,
-     updateDate: jsData[i].Column10
- }
- console.log(temp);
- const data = new projInfo(temp);
- data.save();
-}
+// for(var i = 0; i < jsData.length; i++){
+//  let temp = {
+//      srNo : (i+1),
+//      projectName: jsData[i].Column2,
+//      projectCapacity: jsData[i].Column3,
+//      projCost: jsData[i].Column4,
+//      sector: jsData[i].Column5,
+//      subSector: jsData[i].Column6,
+//      status: jsData[i].Column7,
+//      projAuth: jsData[i].Column8,
+//      location: jsData[i].Column9,
+//      updateDate: jsData[i].Column10
+//  }
+//  console.log(temp);
+//  const data = new projInfo(temp);
+//  data.save();
+// }
 
 
 
@@ -127,6 +127,20 @@ const Storage = multer.diskStorage({
 
 const upload = multer({ 
     storage:Storage
+});
+
+const Storage1 = multer.diskStorage({
+    destination:function(req, file, cb){
+        cb(null, './public/tenders');
+    },
+    filename: (req, file, cb) => {
+        console.log(file);
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload1 = multer({ 
+    storage:Storage1
 });
 
 //GET Home1
@@ -469,6 +483,13 @@ app.post("/reportNewIssue", (req, res) => {
     issue.save();
     res.redirect("/userHome");
 });
+
+app.post('/uploadPDF', upload1.single('tender'), function (req, res) {
+    // req.file is the `profile-file` file
+    // req.body will hold the text fields, if there were any
+    console.log(req.file.filename);
+    res.redirect("addNewProject");
+  })
 
 app.listen(3000, function() {
     console.log("Server started on 3000")
