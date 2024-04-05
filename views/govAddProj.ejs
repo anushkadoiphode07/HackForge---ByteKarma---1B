@@ -4,63 +4,90 @@
         <div class="border-bottom">
             <h4 class="text-white">Add New Project</h4>
         </div>
-        <div class="projectCapacity">
-            <label for="">Project Capacity(km)</label>
-            <input type="text" name="projCap">
-        </div>
-        <div class="projectCost">
-            <label for="">Project Cost</label>
-            <input type="text" name="projCost">
-        </div>
-        <div class="sector">
-            <label for="sector">Sector</label>
-            <select name="sector" id="sectorInput">
-                <% sectorList.forEach(function(sector){%>
-                <option value=<%= sector %>><%= sector %></option>
-                <%});%>
-            </select>
-        </div>
-        <div class="subSector">
-            <label for="">Sub-Sector</label>
-            <input type="text" name="projSubSect">
-        </div>
-        <div class="Status">
-            <label for="">Status</label>
-            <input type="text" name="projStat">
-        </div>
-        <div class="projAuth">
-            <label for="">Project Authority</label>
-            <input type="text" name="projAuth">
-        </div>
-        <div class="state">
-            <label for="">State</label>
-            <select name="state" id="state">
-                <% if(locals.states) { %>
-                    <% states.forEach(function (state) { %>
-                        <option value="state"><%= state %></option> 
-                    <% }) %>
-                <% } %>
-            </select>
-        </div>
-        <div class="startdate">
-            <label for="">Start Date</label>
-            <input type="text" name="projDate">
-        </div>
-        <div class="estimatetime">
-            <label for="">Estimated Date</label>
-            <input type="text" name="projEst">
-        </div>
-        <div class="tenure">
-            <label for="">Tenure</label>
-            <input type="text" name="tenure">
-        </div>
-        <div class="projDesc">
-            <label for="">Project Description</label>
-            <input type="text" name="projDesc">
-        </div>
-        <div>
-            <input type="submit">
-        </div>
-    </form>
+        <form action="/uploadPDF" method="POST" enctype="multipart/form-data">
+            <div class="mb-3 mt-3 input-group-sm">
+                <label class="form-label text-white"><strong>Upload Tender</strong></label>
+                <input type="file" name="tender" id="" class="form-control">
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary text-white" type="submit">Upload</button>
+            </div>
+        </form>
+        <form action="/addNewProject g-3" method="post">
+            <div class="row mt-3 mb-2">
+                <div class="projectName col-4 m-auto input-group-sm">
+                    <label for="" class="form-label text-white"><strong>Project Name</strong></label>
+                    <input type="text" name="projName" class="form-control">
+                </div>
+                <div class="projectCapacity col-4 m-auto input-group-sm">
+                    <label for="" class="form-label text-white"><strong>Project Capacity(km)</strong></label>
+                    <input type="text" name="projCap" class="form-control">
+                </div>
+                <div class="projectCost col-4 input-group-sm">
+                    <label for="" class="form-label text-white"><strong>Project Cost</strong></label>
+                    <input type="text" name="projCost" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="sector col-4 input-group-sm">
+                    <label for="sector" class="form-label text-white"><strong>Sector</strong></label>
+                    <select name="sector" id="sectorInput" class="form-select">
+                        <% sectorList.forEach(function(sector){%>
+                        <option value=<%= sector %>><%= sector %></option>
+                        <%});%>
+                    </select>
+                </div>
+                <div class="subSector col-4 input-group-sm">
+                    <label for="" class="form-label text-white"><strong>Sub-Sector</strong></label>
+                    <input type="text" name="projSubSect" class="form-control">
+                </div>
+                <div class="Status mb-1 col-4 input-group-sm">
+                    <label for="" class="form-label text-white"><strong>Status</strong></label>
+                    <input type="text" name="projStat" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="projAuth mb-1 col-4 input-group-sm">
+                    <label for="" class="form-label text-white"><strong>Project Authority</strong></label>
+                    <input type="text" name="projAuth" class="form-control">
+                </div>
+                <div class="state mb-1 col-4 input-group-sm">
+                    <label for="" class="form-label text-white"><strong>State</strong></label>
+                    <select name="state" id="state" class="form-select">
+                        <% if(locals.states) { %>
+                            <% states.forEach(function (state) { %>
+                                <option value="state"><%= state %></option> 
+                            <% }) %>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="tenure mb-1 col-4 input-group-sm">
+                    <label for="" class="form-label text-white"><strong>Tenure</strong></label>
+                    <input type="text" name="tenure" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="estimatetime mb-1 col input-group-sm">
+                    <label for="" class="form-label text-white"><strong>Estimated Date</strong></label>
+                    <input type="date" name="projEst" class="form-control">
+                </div>
+                <div class="startdate mb-1 col input-group-sm">
+                    <label for="" class="form-label text-white"><strong>Start Date</strong></label>
+                    <input type="date" name="projDate" class="form-control">
+                </div>    
+            </div>
+            <div class="row">
+                <div class="projDesc mb-1 col input-group-sm">
+                    <label for="" class="form-label text-white"><strong>Project Description</strong></label>
+                    <textarea name="projDesc" cols="120" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="mb-1 col">
+                    <button class="btn btn-primary text-white" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
